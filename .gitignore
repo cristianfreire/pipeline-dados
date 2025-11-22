@@ -1,0 +1,31 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Logs and local data
+pipeline.log
+crypto_prices.db
+crypto_prices.csv
+
+# Airflow runtime artifacts
+airflow/logs/
+airflow/.airflowenv
+airflow/airflow.db
+
+# Docker artifacts
+docker/.env
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
