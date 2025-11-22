@@ -40,3 +40,5 @@ RuntimeError: Erro ao se comunicar com a API Coinbase.
 2025-11-22 15:51:30 - INFO - pipeline.pipeline - Pipeline executado com sucesso.
 2025-11-22 15:53:40 - INFO - pipeline.pipeline - Pipeline executado com sucesso.
 2025-11-22 15:54:27 - INFO - pipeline.pipeline - Pipeline executado com sucesso.
+2025-11-22 16:00:01 - INFO - pipeline.pipeline - Pipeline executado com sucesso.
+2025-11-22 16:02:43 - INFO - pipeline.pipeline - Pipeline executado com sucesso.

@@ -75,6 +75,7 @@ Etapas principais:
 	Ajuste o valor de `API` caso precise apontar para outra moeda ou provedor.
 
 5. **(Opcional)** Configure os alertas por e-mail no arquivo `.env` preenchendo remetente, destinatários e credenciais SMTP. Defina `EMAIL_ALERTS_ENABLED=true` para ativar o envio.
+6. **(Opcional)** Ajuste os caminhos de saída (`DATABASE_PATH`, `CSV_PATH`) caso queira gravar os arquivos fora do diretório raiz do projeto.
 
 ## Execução do Pipeline
 
@@ -147,6 +148,7 @@ Ao finalizar, os dados coletados serão anexados à tabela `prices` em `crypto_p
 - **Fonte:** `https://api.coinbase.com/v2/prices/BTC-USD/spot` (valor configurável via `.env`).
 - **Banco SQLite (`crypto_prices.db`):** tabela `prices` com colunas `timestamp` (`TEXT`) e `price` (`REAL`).
 - **CSV (`crypto_prices.csv`):** mesmas colunas do banco, útil para consumo por ferramentas de BI como Power BI.
+- Os caminhos padrão podem ser personalizados via variáveis de ambiente `DATABASE_PATH` e `CSV_PATH`.
 
 ## Monitoramento e Troubleshooting
 - Verifique conectividade com a API executando `Invoke-WebRequest` ou `requests.get` diretamente no console.

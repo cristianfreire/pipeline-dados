@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List
 
 from dotenv import load_dotenv
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -48,6 +49,13 @@ def _parse_recipients(raw_recipients: str | None) -> List[str]:
     return [recipient.strip() for recipient in raw_recipients.split(",") if recipient.strip()]
 
 
+def _resolve_project_path(path_value: str, default_value: str) -> Path:
+    candidate = Path(path_value or default_value)
+    if candidate.is_absolute():
+        return candidate
+    return (PROJECT_ROOT / candidate).resolve()
+
+
 def load_config() -> AppConfig:
     """Carrega a configuração do pipeline a partir das variáveis de ambiente."""
     dotenv_path = PROJECT_ROOT / ".env"
@@ -56,6 +64,8 @@ def load_config() -> AppConfig:
     api_url = os.getenv("API", "").strip()
     logging_level = os.getenv("LOG_LEVEL", "INFO").upper()
     logging_file = os.getenv("LOG_FILE", "pipeline.log").strip() or "pipeline.log"
+    database_path_raw = os.getenv("DATABASE_PATH", "crypto_prices.db").strip() or "crypto_prices.db"
+    csv_path_raw = os.getenv("CSV_PATH", "crypto_prices.csv").strip() or "crypto_prices.csv"
 
     email_enabled = _str_to_bool(os.getenv("EMAIL_ALERTS_ENABLED", "false"))
     email_sender = os.getenv("EMAIL_ALERT_SENDER")
@@ -73,6 +83,8 @@ def load_config() -> AppConfig:
 
     config = AppConfig(
         api_url=api_url,
+        database_path=str(_resolve_project_path(database_path_raw, "crypto_prices.db")),
+        csv_path=str(_resolve_project_path(csv_path_raw, "crypto_prices.csv")),
         logging=LoggingConfig(level=logging_level, file=logging_file),
         email=EmailConfig(
             enabled=email_enabled,
